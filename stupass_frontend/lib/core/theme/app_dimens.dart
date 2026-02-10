@@ -9,6 +9,8 @@ class AppDimens {
   static const double radiusRec = 10.0;
   static const double radiusCir = 100.0;
 
+  static const double paddingDefault = 8.0;
+
   static const double iconSmall = 16.0;
   static const double iconDefault = 24.0;
   static const double iconLarge = 34.0;
