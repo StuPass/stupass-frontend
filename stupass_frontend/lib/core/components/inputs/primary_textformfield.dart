@@ -35,19 +35,19 @@ class PrimaryTextformfield extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(
-          color: ColorPalette.disableTextColor,
+          color: ColorPalette.textDisabledColor,
           fontSize: TextStyles.largeInputTextSize,
         ),
         prefixIcon: Icon(
           prefixIcon,
-          color: ColorPalette.disableTextColor,
+          color: ColorPalette.textDisabledColor,
           size: AppDimens.iconDefault,
         ),
         suffixIcon: isPassword
             ? IconButton(
                 icon: Icon(
                   isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                  color: ColorPalette.disableTextColor,
+                  color: ColorPalette.textDisabledColor,
                   size: AppDimens.iconDefault,
                 ),
                 onPressed: onTogglePassword,

@@ -20,4 +20,5 @@ class TextStyles {
 
   static const double largeInputTextSize = 20.0;
   static const double mediumInputTextSize = 16.0;
+  static const double smallInputTextSize = 14.0;
 }

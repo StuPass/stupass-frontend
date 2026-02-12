@@ -39,7 +39,7 @@ class WelcomePage extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 40,
                           fontWeight: FontWeight.bold,
-                          color: ColorPalette.textColorPrimary,
+                          color: ColorPalette.textPrimaryColor,
                         ),
                       ),
                       const Text(
@@ -75,7 +75,7 @@ class WelcomePage extends StatelessWidget {
                     "Nền tảng mua bán trao đổi đồ dùng dành riêng cho cộng đồng sinh viên",
                     style: TextStyle(
                       fontSize: TextStyles.mediumBodySize,
-                      color: ColorPalette.disableTextColor,
+                      color: ColorPalette.textDisabledColor,
                     ),
                   ),
 
@@ -93,7 +93,7 @@ class WelcomePage extends StatelessWidget {
                         "Mua bán đồ cũ giá tốt",
                         style: const TextStyle(
                           fontSize: TextStyles.mediumBodySize,
-                          color: ColorPalette.disableTextColor,
+                          color: ColorPalette.textDisabledColor,
                         ),
                       ),
                     ],
@@ -110,7 +110,7 @@ class WelcomePage extends StatelessWidget {
                         "Cộng đồng sinh viên uy tín",
                         style: const TextStyle(
                           fontSize: TextStyles.mediumBodySize,
-                          color: ColorPalette.disableTextColor,
+                          color: ColorPalette.textDisabledColor,
                         ),
                       ),
                     ],
@@ -127,7 +127,7 @@ class WelcomePage extends StatelessWidget {
                         "Giao dịch an toàn nhanh chóng",
                         style: const TextStyle(
                           fontSize: TextStyles.mediumBodySize,
-                          color: ColorPalette.disableTextColor,
+                          color: ColorPalette.textDisabledColor,
                         ),
                       ),
                     ],
