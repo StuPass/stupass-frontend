@@ -21,4 +21,7 @@ class AppDimens {
   static const double largePlaceholderInputHeight = 120.0;
   static const double mediumPlaceholderInputHeight = 56.0;
   static const double smallPlaceholderInputHeight = 40.0;
+
+  static const double postWidth = 156.0;
+  static const double postHeight = 256.0;
 }
