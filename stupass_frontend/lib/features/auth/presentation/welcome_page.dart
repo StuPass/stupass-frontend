@@ -142,7 +142,7 @@ class WelcomePage extends StatelessWidget {
                     buttonHeight: 56,
                     backgroundColor: ColorPalette.primaryColor,
                     suffixIcon: Icons.arrow_forward,
-                    onPressed: () => context.go('/signin'),
+                    onPressed: () => context.push('/signin'),
                   ),
                   const SizedBox(height: 16),
                 ],

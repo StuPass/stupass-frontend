@@ -1,29 +1,33 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:stupass_frontend/core/components/buttons/outline_button.dart';
 import 'package:stupass_frontend/core/components/buttons/primary_button.dart';
 import 'package:stupass_frontend/core/components/inputs/primary_textformfield.dart';
 import 'package:stupass_frontend/core/theme/color_palette.dart';
 import 'package:stupass_frontend/core/theme/text_styles.dart';
 
-class SigninPage extends StatefulWidget {
-  const SigninPage({super.key});
+class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
 
   @override
-  State<SigninPage> createState() => _SigninPageState();
+  State<SignupPage> createState() => _SignupPageState();
 }
 
-class _SigninPageState extends State<SigninPage> {
-  final TextEditingController _phoneNumberController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+class _SignupPageState extends State<SignupPage> {
+  // 1. Controllers
+  final _phoneController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
 
+  // 2. Visibility Toggles 
   bool _isPasswordVisible = false;
+  bool _isConfirmPasswordVisible = false;
 
   @override
   void dispose() {
-    _phoneNumberController.dispose();
+    _phoneController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -36,7 +40,7 @@ class _SigninPageState extends State<SigninPage> {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => context.pop(), 
+          onPressed: () => context.pop(),
         ),
       ),
       body: Padding(
@@ -44,29 +48,35 @@ class _SigninPageState extends State<SigninPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // ---------------------------------------------------------
             // 1. Header Section
+            // ---------------------------------------------------------
             const SizedBox(height: 16),
             const Text(
-              "Chào mừng trở lại!",
+              "Đăng ký",
               style: TextStyle(
-                fontSize: TextStyles.heading1Size, 
+                fontSize: TextStyles.heading1Size,
                 fontWeight: FontWeight.bold,
                 color: ColorPalette.textColorPrimary,
               ),
             ),
             const SizedBox(height: 8),
             const Text(
-              "Đăng nhập để tiếp tục",
+              "Nhập các thông tin cần thiết để hoàn thành thiết lập hồ sơ cá nhân",
               style: TextStyle(
-                fontSize: TextStyles.largeButtonTextSize,
-                color: ColorPalette.textColorSecondary, 
+                fontSize: 16, 
+                color: ColorPalette.textColorSecondary,
+                height: 1.5, 
               ),
             ),
-            
+
             const SizedBox(height: 32),
 
+            // ---------------------------------------------------------
             // 2. Form Section
-            // Phone Number Input
+            // ---------------------------------------------------------
+            
+            // --- Phone Field ---
             const Text(
               "Số điện thoại",
               style: TextStyle(
@@ -74,22 +84,20 @@ class _SigninPageState extends State<SigninPage> {
                 color: ColorPalette.textColorSecondary,
               ),
             ),
-
             const SizedBox(height: 8),
-
             PrimaryTextformfield(
-              hintText: "0123456789", 
-              prefixWidget: const Icon(Icons.phone_outlined, color: Colors.grey), 
+              hintText: "0123456789",
+              prefixWidget: const Icon(Icons.phone_outlined, color: Colors.grey),
               onTogglePassword: () {}, 
-              keyboardType: TextInputType.number, 
-              controller: _phoneNumberController, 
-              onSaved: (newValue) {}, 
-              validator: (value) {}
+              keyboardType: TextInputType.phone,
+              controller: _phoneController,
+              onSaved: (newValue) {},
+              validator: (value) {},
             ),
 
             const SizedBox(height: 24),
 
-            // Password Input
+            // --- Password Field ---
             const Text(
               "Mật khẩu",
               style: TextStyle(
@@ -97,24 +105,20 @@ class _SigninPageState extends State<SigninPage> {
                 color: ColorPalette.textColorSecondary,
               ),
             ),
-
             const SizedBox(height: 8),
-
             PrimaryTextformfield(
-              hintText: "**********",
-              prefixWidget: const Icon(Icons.lock_outline, color: Colors.grey), 
+              hintText: "Tối thiểu 8 kí tự", 
+              prefixWidget: const Icon(Icons.lock_outline, color: Colors.grey),
               isPassword: true,
               isPasswordVisible: _isPasswordVisible,
               onTogglePassword: () {
                 setState(() {
                   _isPasswordVisible = !_isPasswordVisible;
                 });
-              }, 
-              keyboardType: TextInputType.visiblePassword, 
-              controller: _passwordController, 
-              onSaved: (newValue) {
-                debugPrint("Password saved: $newValue");
-              }, 
+              },
+              keyboardType: TextInputType.visiblePassword,
+              controller: _passwordController,
+              onSaved: (newValue) {},
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return "Password is required";
@@ -123,97 +127,78 @@ class _SigninPageState extends State<SigninPage> {
                   return "Password must be at least 6 chars";
                 }
                 return null; 
-              }
+              },
             ),
 
-            const SizedBox(height: 8),
+            const SizedBox(height: 24),
 
-            // Forgot Password Link
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                onPressed: () {},
-                child: const Text(
-                  "Quên mật khẩu?",
-                  style: TextStyle(
-                    color: ColorPalette.primaryButtonColor, // Green color from image
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+            // --- Confirm Password Field (New) ---
+            const Text(
+              "Nhập lại mật khẩu",
+              style: TextStyle(
+                fontSize: 16,
+                color: ColorPalette.textColorSecondary,
               ),
             ),
+            const SizedBox(height: 8),
+            PrimaryTextformfield(
+              hintText: "**********",
+              prefixWidget: const Icon(Icons.lock_outline, color: Colors.grey),
+              isPassword: true,
+              isPasswordVisible: _isConfirmPasswordVisible, 
+              onTogglePassword: () {
+                setState(() {
+                  _isConfirmPasswordVisible = !_isConfirmPasswordVisible;
+                });
+              },
+              keyboardType: TextInputType.visiblePassword,
+              controller: _confirmPasswordController,
+              onSaved: (newValue) {},
+              validator: (value) {},
+            ),
 
-            const SizedBox(height: 16),
+            const SizedBox(height: 32),
 
-            // 3. Actions Section
-            // Login Button
+            // ---------------------------------------------------------
+            // 3. Action Section
+            // ---------------------------------------------------------
             PrimaryButton(
-              label: "Đăng nhập", 
-              labelSize: TextStyles.largeButtonTextSize, 
-              buttonHeight: 56, 
-              backgroundColor: ColorPalette.primaryColor, 
+              label: "Đăng ký",
+              labelSize: TextStyles.largeButtonTextSize,
+              buttonHeight: 56,
+              backgroundColor: ColorPalette.primaryColor,
               suffixIcon: Icons.arrow_forward,
               onPressed: () {
-
-              }
-            ),
-
-            const SizedBox(height: 24),
-
-            // Divider "hoặc" (or)
-            const Row(
-              children: [
-                Expanded(child: Divider(color: Colors.grey)),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Text("hoặc", style: TextStyle(color: Colors.grey)),
-                ),
-                Expanded(child: Divider(color: Colors.grey)),
-              ],
-            ),
-
-            const SizedBox(height: 24),
-
-            // Google Sign In Button
-            CustomOutlinedButton(
-              label: "Đăng nhập với Google", 
-              labelSize: TextStyles.largeButtonTextSize, 
-              buttonHeight: 56, 
-              prefixWidget: Image.asset(
-                'assets/images/Google_logo.png',
-                width: 24,
-                height: 24,
-              ),
-              onPressed: () {
-
-              }
+              },
             ),
 
             const Spacer(),
 
-            // Footer: Sign Up
+            // ---------------------------------------------------------
+            // 4. Footer
+            // ---------------------------------------------------------
             Center(
               child: RichText(
                 text: TextSpan(
-                  text: "Chưa có tài khoản? ", // Step 1: Normal text (Note the space at the end)
+                  text: "Đã có tài khoản? ",
                   style: const TextStyle(color: Colors.grey, fontSize: 16),
                   children: [
                     TextSpan(
-                      text: "Đăng ký ngay", // Step 2: Clickable text
+                      text: "Đăng nhập",
                       style: const TextStyle(
                         color: ColorPalette.primaryButtonColor,
                         fontWeight: FontWeight.w600,
                       ),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          context.push('/signup');
+                          context.pop(); 
                         },
                     ),
                   ],
                 ),
-              ),            
+              ),
             ),
-            
+
             const SizedBox(height: 24),
           ],
         ),
