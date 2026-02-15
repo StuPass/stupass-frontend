@@ -7,7 +7,9 @@ class PrimaryTextformfield extends StatelessWidget {
   const PrimaryTextformfield({
     super.key,
     required this.hintText,
-    required this.prefixIcon,
+    this.prefixIcon,
+    this.prefixWidget,
+    this.suffixWidget,
     this.isPassword = false,
     this.isPasswordVisible = false,
     required this.onTogglePassword,
@@ -16,33 +18,51 @@ class PrimaryTextformfield extends StatelessWidget {
     required this.onSaved,
     required this.validator,
   });
+
   final String hintText;
-  final IconData prefixIcon;
+  final IconData? prefixIcon;
+  final Widget? prefixWidget;
+  final Widget? suffixWidget;
   final bool isPassword;
   final bool isPasswordVisible;
-  final Function() onTogglePassword;
+  final VoidCallback onTogglePassword;
   final TextInputType keyboardType;
   final TextEditingController controller;
-  final Function() onSaved;
-  final Function() validator;
+  final void Function(String?)? onSaved;
+  final String? Function(String?)? validator;
+
+
 
   @override
   Widget build(BuildContext context) {
+    Widget? finalPrefix;
+
+    if (prefixWidget != null) {
+      finalPrefix = prefixWidget;
+    } 
+    else if (prefixIcon != null) {
+      finalPrefix = Icon(
+        prefixIcon,
+        color: ColorPalette.textDisabledColor, 
+        size: AppDimens.iconDefault,
+      );
+    }
+
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
       obscureText: isPassword && !isPasswordVisible,
+      style: TextStyle(
+        color: ColorPalette.textDisabledColor,
+        fontSize: TextStyles.largeInputTextSize,
+      ),
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(
           color: ColorPalette.textDisabledColor,
           fontSize: TextStyles.largeInputTextSize,
         ),
-        prefixIcon: Icon(
-          prefixIcon,
-          color: ColorPalette.textDisabledColor,
-          size: AppDimens.iconDefault,
-        ),
+        prefixIcon: finalPrefix,
         suffixIcon: isPassword
             ? IconButton(
                 icon: Icon(
@@ -52,10 +72,10 @@ class PrimaryTextformfield extends StatelessWidget {
                 ),
                 onPressed: onTogglePassword,
               )
-            : null,
+            : suffixWidget,
       ),
-      onSaved: (newValue) => onSaved(),
-      validator: (value) => validator(),
+      onSaved: onSaved,
+      validator: validator,
     );
   }
 }
