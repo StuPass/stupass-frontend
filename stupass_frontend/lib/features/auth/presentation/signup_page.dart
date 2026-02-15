@@ -168,8 +168,7 @@ class _SignupPageState extends State<SignupPage> {
               buttonHeight: 56,
               backgroundColor: ColorPalette.primaryColor,
               suffixIcon: Icons.arrow_forward,
-              onPressed: () {
-              },
+              onPressed: () => context.pushNamed('verify'),
             ),
 
             const Spacer(),

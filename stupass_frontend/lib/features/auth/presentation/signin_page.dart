@@ -6,6 +6,7 @@ import 'package:stupass_frontend/core/components/buttons/primary_button.dart';
 import 'package:stupass_frontend/core/components/inputs/primary_textformfield.dart';
 import 'package:stupass_frontend/core/theme/color_palette.dart';
 import 'package:stupass_frontend/core/theme/text_styles.dart';
+import 'package:stupass_frontend/features/home/presentation/marketplace_page.dart';
 
 class SigninPage extends StatefulWidget {
   const SigninPage({super.key});
@@ -153,9 +154,11 @@ class _SigninPageState extends State<SigninPage> {
               buttonHeight: 56, 
               backgroundColor: ColorPalette.primaryColor, 
               suffixIcon: Icons.arrow_forward,
-              onPressed: () {
-
-              }
+              onPressed: () => Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const MarketplacePage()),
+                (Route<dynamic> route) => false,
+              )
             ),
 
             const SizedBox(height: 24),
@@ -195,11 +198,11 @@ class _SigninPageState extends State<SigninPage> {
             Center(
               child: RichText(
                 text: TextSpan(
-                  text: "Chưa có tài khoản? ", // Step 1: Normal text (Note the space at the end)
+                  text: "Chưa có tài khoản? ", 
                   style: const TextStyle(color: Colors.grey, fontSize: 16),
                   children: [
                     TextSpan(
-                      text: "Đăng ký ngay", // Step 2: Clickable text
+                      text: "Đăng ký ngay", 
                       style: const TextStyle(
                         color: ColorPalette.primaryButtonColor,
                         fontWeight: FontWeight.w600,
