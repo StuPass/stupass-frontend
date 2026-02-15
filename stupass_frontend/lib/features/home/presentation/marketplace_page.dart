@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stupass_frontend/core/theme/app_dimens.dart';
 import 'package:stupass_frontend/core/theme/color_palette.dart';
 import 'package:stupass_frontend/core/theme/text_styles.dart';
-import 'package:stupass_frontend/core/components/buttons/primary_button.dart';
 
 class MarketplacePage extends StatelessWidget {
   const MarketplacePage({super.key});

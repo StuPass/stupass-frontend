@@ -92,7 +92,9 @@ class _SignupPageState extends State<SignupPage> {
               keyboardType: TextInputType.phone,
               controller: _phoneController,
               onSaved: (newValue) {},
-              validator: (value) {},
+              validator: (value) {
+                return null;
+              },
             ),
 
             const SizedBox(height: 24),
@@ -154,7 +156,9 @@ class _SignupPageState extends State<SignupPage> {
               keyboardType: TextInputType.visiblePassword,
               controller: _confirmPasswordController,
               onSaved: (newValue) {},
-              validator: (value) {},
+              validator: (value) {
+                return null;
+              },
             ),
 
             const SizedBox(height: 32),

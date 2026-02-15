@@ -115,7 +115,9 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
                 keyboardType: TextInputType.number,
                 onSaved: (newValue) {},
                 onTogglePassword: () {},
-                validator: (value) {},
+                validator: (value) {
+                  return null;
+                },
               ),
 
               const SizedBox(height: 24),

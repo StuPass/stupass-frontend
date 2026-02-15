@@ -37,7 +37,7 @@ class _SigninPageState extends State<SigninPage> {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => context.pop(), 
+          onPressed: () => context.go('/'), 
         ),
       ),
       body: Padding(
@@ -85,7 +85,9 @@ class _SigninPageState extends State<SigninPage> {
               keyboardType: TextInputType.number, 
               controller: _phoneNumberController, 
               onSaved: (newValue) {}, 
-              validator: (value) {}
+              validator: (value) {
+                return null;
+              }
             ),
 
             const SizedBox(height: 24),

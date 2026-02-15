@@ -15,3 +15,4 @@ class StuPassApp extends StatelessWidget {
     );
   }
 }
+
