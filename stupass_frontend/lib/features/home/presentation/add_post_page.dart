@@ -22,7 +22,7 @@ class AddPostPage extends StatelessWidget {
           Container(
             width: double.infinity,
             height: 100,
-            color: ColorPalette.backgroundColor,
+            color: ColorPalette.surfaceColor,
             alignment: Alignment.bottomCenter,
             padding: const EdgeInsets.symmetric(horizontal: AppDimens.paddingDefault),
             child: Row(
@@ -51,6 +51,7 @@ class AddPostPage extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  SizedBox(height: AppDimens.spacingM),
                   Container(
                     width: double.infinity,
                     margin: const EdgeInsets.symmetric(horizontal: 16),
