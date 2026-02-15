@@ -14,6 +14,7 @@ class TextStyles {
 
   static const double largeCaptionSize = 12.0;
   static const double mediumCaptionSize = 11.0;
+  static const double smallCaptionSize = 10.0;
 
   static const double largeButtonTextSize = 20.0;
   static const double mediumButtonTextSize = 14.0;
