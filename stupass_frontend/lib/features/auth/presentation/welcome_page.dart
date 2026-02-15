@@ -3,7 +3,7 @@ import 'package:stupass_frontend/core/theme/app_dimens.dart';
 import 'package:stupass_frontend/core/theme/color_palette.dart';
 import 'package:stupass_frontend/core/theme/text_styles.dart';
 import 'package:stupass_frontend/core/components/buttons/primary_button.dart';
-
+import 'package:go_router/go_router.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -142,8 +142,7 @@ class WelcomePage extends StatelessWidget {
                     buttonHeight: 56,
                     backgroundColor: ColorPalette.primaryColor,
                     suffixIcon: Icons.arrow_forward,
-                    onPressed: () {
-                    },
+                    onPressed: () => context.go('/signin'),
                   ),
                   const SizedBox(height: 16),
                 ],
