@@ -19,4 +19,6 @@ class ColorPalette {
     static const Color borderColor = Color(0xFFCFE7CF);
     static const Color inputFieldBackgroundColor = Color(0xFFFFFFFF);
     static const Color postColor = Color(0xFFFFFFFF);
+
+    static const Color errorColor = Color(0xFFFF0000);
 }

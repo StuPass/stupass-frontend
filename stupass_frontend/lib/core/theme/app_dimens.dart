@@ -8,8 +8,9 @@ class AppDimens {
 
   static const double radiusRec = 10.0;
   static const double radiusCir = 100.0;
+  static const double borderWidth = 1.5;
 
-  static const double paddingDefault = 8.0;
+  static const double paddingDefault = 16.0;
 
   static const double iconSmall = 16.0;
   static const double iconDefault = 24.0;
@@ -24,4 +25,8 @@ class AppDimens {
 
   static const double postWidth = 156.0;
   static const double postHeight = 256.0;
+
+  static const double largeInputFieldHeight = 120.0;
+  static const double mediumInputFieldHeight = 60.0;
+  static const double smallInputFieldHeight = 56.0;
 }
