@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:stupass_frontend/features/auth/presentation/welcome_page.dart';
 import 'package:stupass_frontend/core/router/router.dart';
 
 void main() {

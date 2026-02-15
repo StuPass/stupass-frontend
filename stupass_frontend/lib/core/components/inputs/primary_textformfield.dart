@@ -9,6 +9,7 @@ class PrimaryTextformfield extends StatelessWidget {
     required this.hintText,
     this.prefixIcon,
     this.prefixWidget,
+    this.suffixWidget,
     this.isPassword = false,
     this.isPasswordVisible = false,
     required this.onTogglePassword,
@@ -21,6 +22,7 @@ class PrimaryTextformfield extends StatelessWidget {
   final String hintText;
   final IconData? prefixIcon;
   final Widget? prefixWidget;
+  final Widget? suffixWidget;
   final bool isPassword;
   final bool isPasswordVisible;
   final VoidCallback onTogglePassword;
@@ -57,7 +59,7 @@ class PrimaryTextformfield extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(
-          color: ColorPalette.disableTextColor,
+          color: ColorPalette.textColorSecondary,
           fontSize: TextStyles.largeInputTextSize,
         ),
         prefixIcon: finalPrefix,
@@ -70,7 +72,7 @@ class PrimaryTextformfield extends StatelessWidget {
                 ),
                 onPressed: onTogglePassword,
               )
-            : null,
+            : suffixWidget,
       ),
       onSaved: onSaved,
       validator: validator,

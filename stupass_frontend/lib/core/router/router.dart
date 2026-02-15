@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stupass_frontend/features/account/presentation/setting_page.dart';
+import 'package:stupass_frontend/features/auth/presentation/create_profile_page.dart';
 import 'package:stupass_frontend/features/auth/presentation/signin_page.dart';
 import 'package:stupass_frontend/features/auth/presentation/signup_page.dart';
 import 'package:stupass_frontend/features/auth/presentation/verify_via_otp_page.dart';
@@ -28,6 +29,13 @@ final router = GoRouter(
           name: 'verify',
           path: 'verify_via_otp',
           builder: (context, state) => const OtpVerificationPage(),
+          routes: [
+            GoRoute(
+              name: 'create',
+              path: 'create_profile',
+              builder: (context, state) => const CreateProfilePage(),
+            )
+          ]
         ),
       ]
     ),

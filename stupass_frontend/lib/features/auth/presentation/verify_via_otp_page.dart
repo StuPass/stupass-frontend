@@ -123,7 +123,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                 pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
                 showCursor: true,
                 onCompleted: (pin) {
-                  print("User entered pin: $pin");
+                  debugPrint("User entered pin: $pin");
                 },
               ),
             ),
@@ -138,8 +138,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
               labelSize: TextStyles.largeButtonTextSize, 
               buttonHeight: 56,
               backgroundColor: ColorPalette.primaryColor, 
-              onPressed: () {
-              },
+              onPressed: () => context.pushReplacement('/signup/verify_via_otp/create_profile'),
             ),
 
             const Spacer(),
