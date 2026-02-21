@@ -76,6 +76,7 @@ class PrimaryTextformfield extends StatelessWidget {
       ),
       onSaved: onSaved,
       validator: validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
     );
   }
 }
