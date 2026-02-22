@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "215675111660",
+    "project_id": "school-app-2ce90",
+    "storage_bucket": "school-app-2ce90.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215675111660:android:ded1f0ab7a81fbe2b53dc9",
+        "android_client_info": {
+          "package_name": "com.example.stupass_frontend"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5NAzg-crL7i1zMUIxuPTKrvHoO3K-HXI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
