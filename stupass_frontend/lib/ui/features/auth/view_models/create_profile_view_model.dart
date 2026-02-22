@@ -17,7 +17,7 @@ class CreateProfileViewModel extends ChangeNotifier {
     : _registrationSession = registrationSession, 
       _authRepository = authRepository;
 
-  Future<void> completeRegistration(String name, String studentId, String schoolId) async {
+  Future<void> completeRegistration(String username, String fullName, String studentId, String schoolId) async {
     _isLoading = true;
     notifyListeners();
 
@@ -26,9 +26,10 @@ class CreateProfileViewModel extends ChangeNotifier {
       final password = _registrationSession.password!;
 
       await _authRepository.register(
+        username: username,
         phone: phone,
         password: password,
-        fullName: name,
+        fullName: fullName,
         studentId: studentId,
         schoolId: schoolId,
       );

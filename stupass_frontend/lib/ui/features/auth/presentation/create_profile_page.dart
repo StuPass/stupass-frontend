@@ -22,6 +22,7 @@ class CreateProfilePage extends StatefulWidget {
 class _CreateProfilePageState extends State<CreateProfilePage> {
   final _formKey = GlobalKey<FormState>();
 
+  final _usernameController = TextEditingController();
   final _fullNameController = TextEditingController();
   final _studentIdController = TextEditingController();
   
@@ -44,6 +45,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
   void dispose() {
     _fullNameController.dispose();
     _studentIdController.dispose();
+    _usernameController.dispose();
     widget.viewModel.removeListener(_onResult);
     super.dispose();
   }
@@ -95,6 +97,30 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
                 // ---------------------------------------------------------
                 // 2. Form Section
                 // ---------------------------------------------------------
+
+                // --- Username Field ---
+                const Text(
+                  "Username",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: ColorPalette.textSecondaryColor,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                PrimaryTextformfield(
+                  hintText: "A_123",
+                  prefixWidget: const Icon(Icons.account_circle, color: Colors.grey),
+                  controller: _usernameController,
+                  keyboardType: TextInputType.name,
+                  onSaved: (newValue) {},
+                  onTogglePassword: () {},
+                  validator: (value) {
+                    if (value == null || value.isEmpty) return "Vui lòng nhập username.";
+                    return null;
+                  },
+                ),
+
+                const SizedBox(height: 24),
 
                 // --- Full Name Field ---
                 const Text(
@@ -201,6 +227,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           await widget.viewModel.completeRegistration(
+                            _usernameController.text,
                             _fullNameController.text,
                             _studentIdController.text,
                             _selectedSchool!,

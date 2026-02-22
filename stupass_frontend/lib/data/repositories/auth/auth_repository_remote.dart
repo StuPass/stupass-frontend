@@ -10,6 +10,7 @@ class AuthRepositoryRemote implements AuthRepository {
 
   @override
   Future<void> register({
+    required String username,
     required String phone,
     required String password,
     required String fullName,
@@ -18,6 +19,7 @@ class AuthRepositoryRemote implements AuthRepository {
   }) async {
     
     final requestDto = RegisterRequest(
+      username: username,
       phone: phone,
       password: password,
       fullName: fullName,

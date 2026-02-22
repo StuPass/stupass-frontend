@@ -1,4 +1,5 @@
 class RegistrationSession {
+  String? username;
   String? phone;
   String? password;
   String? otpCode;      
@@ -8,6 +9,7 @@ class RegistrationSession {
   String? verificationId;
 
   void clear() {
+    username = null;
     phone = null;
     password = null;
     otpCode = null;
