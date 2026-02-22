@@ -277,6 +277,8 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
     );
   }
   void _onResult() {
+    if (widget.viewModel.isLoading) return;
+    
     if (widget.viewModel.isSuccess) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
