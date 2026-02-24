@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:stupass_frontend/ui/features/auth/view_models/signnup_view_model/registration_session.dart';
 
 class OtpVerificationViewModel extends ChangeNotifier {

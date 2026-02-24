@@ -9,6 +9,7 @@ import 'package:stupass_frontend/ui/features/auth/presentation/signup_page.dart'
 import 'package:stupass_frontend/ui/features/auth/presentation/verify_via_otp_page.dart';
 import 'package:stupass_frontend/ui/features/auth/presentation/welcome_page.dart';
 import 'package:stupass_frontend/ui/features/auth/view_models/create_profile_view_model.dart';
+import 'package:stupass_frontend/ui/features/auth/view_models/signin_view_model.dart';
 import 'package:stupass_frontend/ui/features/auth/view_models/signnup_view_model/signup_view_model.dart';
 import 'package:stupass_frontend/ui/features/auth/view_models/verify_via_otp_view_model.dart';
 import 'package:stupass_frontend/ui/features/chat/presentation/chat_box_page.dart';
@@ -30,7 +31,9 @@ final router = GoRouter(
     ),
     GoRoute(
       path: Routes.signin,
-      builder: (context, state) => const SigninPage(),
+      builder: (context, state) => SigninPage(
+        viewModel: SigninViewModel(authRepository: context.read()),
+      ),
     ),
     GoRoute(
       path: Routes.signup,
