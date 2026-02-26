@@ -7,6 +7,7 @@ class TextStyles {
   static const double heading2Size = 28.0;
   static const double heading3Size = 24.0;
   static const double heading4Size = 18.0;
+  static const double heading5Size = 16.0;
 
   static const double largeBodySize = 18.0;
   static const double mediumBodySize = 16.0;
