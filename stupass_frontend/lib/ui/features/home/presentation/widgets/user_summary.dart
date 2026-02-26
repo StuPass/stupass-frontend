@@ -51,7 +51,7 @@ class UserSummary extends StatelessWidget {
                 left: AppDimens.spacingM,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white,
                     shape: BoxShape.circle,
                   ),
                   child: IconButton(

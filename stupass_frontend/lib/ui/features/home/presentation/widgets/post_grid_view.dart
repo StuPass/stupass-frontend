@@ -8,8 +8,10 @@ class PostGridView extends StatelessWidget {
   const PostGridView({
     super.key,
     required this.itemCount,
+    this.title,
   });
 
+  final String? title;
   final int itemCount;
 
   @override
@@ -23,7 +25,7 @@ class PostGridView extends StatelessWidget {
               alignment: Alignment.centerLeft,
               padding: const EdgeInsets.symmetric(vertical: AppDimens.spacingM),
               child: Text(
-                "Dành cho bạn",
+                title ?? '',
                 style: TextStyle(
                   fontFamily: TextStyles.fontFamily,
                   fontSize: TextStyles.heading4Size,
@@ -43,7 +45,12 @@ class PostGridView extends StatelessWidget {
               childAspectRatio: 0.75,
             ),
             delegate: SliverChildBuilderDelegate(
-              (context, index) => const Post(),
+              (context, index) => const Post(
+                imageUrl: 'assets/images/sample_product.jpg',
+                title: 'Giáo trình Cơ sở dữ liệu',
+                price: '150,000 VND',
+                location: 'Thủ Đức, tp.HCM',
+              ),
               childCount: itemCount,
             ),
           ),

@@ -6,6 +6,7 @@ import 'package:stupass_frontend/ui/core/components/buttons/circle_iconbutton.da
 import 'package:stupass_frontend/ui/core/components/inputs/products_search_field.dart';
 import 'package:stupass_frontend/ui/features/home/presentation/widgets/filter_category_bar.dart';
 import 'package:stupass_frontend/ui/features/home/presentation/widgets/post_grid_view.dart';
+import 'package:stupass_frontend/ui/features/home/presentation/filtered_page.dart';
 
 // hiện tại chưa có logic, selectedindex sẽ được thêm sau này. để đồng bộ filterbar và post grid
 class MarketplacePage extends StatelessWidget {
@@ -34,7 +35,7 @@ class MarketplacePage extends StatelessWidget {
                     fontSize: 40,
                     fontWeight: FontWeight.bold,
                     color: ColorPalette.textPrimaryColor,
-                    fontFamily: TextStyles.fontFamily
+                    fontFamily: TextStyles.fontFamily,
                   ),
                 ),
                 const Text(
@@ -43,7 +44,7 @@ class MarketplacePage extends StatelessWidget {
                     fontSize: 40,
                     fontWeight: FontWeight.w900,
                     color: ColorPalette.primaryColor,
-                    fontFamily: TextStyles.fontFamily
+                    fontFamily: TextStyles.fontFamily,
                   ),
                 ),
                 const Spacer(),
@@ -56,14 +57,18 @@ class MarketplacePage extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  flex: 9, 
+                  flex: 9,
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: ColorPalette.surfaceColor,
                       borderRadius: BorderRadius.circular(AppDimens.radiusCir),
                     ),
-                    child: ProductsSearchField())),
+                    child: ProductsSearchField(
+                      searchController: TextEditingController(),
+                    ),
+                  ),
+                ),
                 Expanded(
                   flex: 1,
                   child: Row(
@@ -71,7 +76,14 @@ class MarketplacePage extends StatelessWidget {
                     children: [
                       CircleIconbutton(
                         icon: Icons.filter_list,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FilteredPage(),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -81,13 +93,10 @@ class MarketplacePage extends StatelessWidget {
             // Category filter section
             FilterCategoryBar(),
             // Posts grid section
-            PostGridView(
-              itemCount: 10,
-            ),
+            PostGridView(title: "Dành cho bạn", itemCount: 10),
           ],
         ),
       ),
     );
   }
 }
-
