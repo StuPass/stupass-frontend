@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stupass_frontend/ui/core/theme/app_dimens.dart';
 import 'package:stupass_frontend/ui/core/theme/color_palette.dart';
 import 'package:stupass_frontend/ui/core/theme/text_styles.dart';
+import 'package:stupass_frontend/ui/features/home/presentation/view_detail_post_page.dart';
 
 class Post extends StatelessWidget {
   const Post({
@@ -91,7 +92,9 @@ class Post extends StatelessWidget {
             ),
           ],
         ),
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ViewDetailPostPage()));
+        },
       ),
     );
   }
