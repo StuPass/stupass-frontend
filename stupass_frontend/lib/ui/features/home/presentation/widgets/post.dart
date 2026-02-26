@@ -2,11 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:stupass_frontend/ui/core/theme/app_dimens.dart';
 import 'package:stupass_frontend/ui/core/theme/color_palette.dart';
 import 'package:stupass_frontend/ui/core/theme/text_styles.dart';
+import 'package:stupass_frontend/ui/features/home/presentation/view_detail_post_page.dart';
 
 class Post extends StatelessWidget {
   const Post({
     super.key,
+    required this.imageUrl,
+    required this.title,
+    required this.price,
+    required this.location,
+    this.onTap,
     });
+
+  final String imageUrl;
+  final String title;
+  final String price;
+  final String location;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +47,7 @@ class Post extends StatelessWidget {
                       topRight: Radius.circular(AppDimens.radiusRec),
                     ),
                     image: DecorationImage(
-                      image: AssetImage('assets/images/sample_product.jpg'),
+                      image: AssetImage(imageUrl),
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -54,7 +66,7 @@ class Post extends StatelessWidget {
             ),
             // Title section
             Text(
-              'Giáo trình Cơ sở dữ liệu',
+              title,
               style: TextStyle(
                 fontSize: TextStyles.smallBodySize,
                 fontWeight: FontWeight.normal,
@@ -63,7 +75,7 @@ class Post extends StatelessWidget {
             ),
             // Price section
             Text(
-              '150,000 VND',
+              price,
               style: TextStyle(
                 fontSize: TextStyles.mediumBodySize,
                 fontWeight: FontWeight.bold,
@@ -80,7 +92,7 @@ class Post extends StatelessWidget {
                 ),
                 SizedBox(width: 4),
                 Text(
-                  'Thủ Đức, tp.HCM',
+                  location,
                   style: TextStyle(
                     fontSize: TextStyles.largeCaptionSize,
                     fontWeight: FontWeight.normal,
@@ -91,7 +103,9 @@ class Post extends StatelessWidget {
             ),
           ],
         ),
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ViewDetailPostPage()));
+        },
       ),
     );
   }

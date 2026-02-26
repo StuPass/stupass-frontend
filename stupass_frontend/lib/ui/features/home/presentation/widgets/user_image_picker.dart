@@ -4,7 +4,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:stupass_frontend/ui/core/theme/app_dimens.dart';
 import 'package:stupass_frontend/ui/core/theme/color_palette.dart';
 
-
 class UserImagePicker extends StatefulWidget {
   const UserImagePicker({super.key});
 

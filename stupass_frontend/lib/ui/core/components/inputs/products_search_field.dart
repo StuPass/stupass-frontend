@@ -4,11 +4,16 @@ import 'package:stupass_frontend/ui/core/theme/app_dimens.dart';
 import 'package:stupass_frontend/ui/core/theme/text_styles.dart';
 
 class ProductsSearchField extends StatelessWidget {
-  const ProductsSearchField({super.key});
+  const ProductsSearchField({
+    super.key,
+    required this.searchController,
+    });
 
+  final TextEditingController searchController;
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: searchController,
       decoration: InputDecoration(
         hintText: 'Tìm sản phẩm...',
         hintStyle: TextStyle(
