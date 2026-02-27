@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:stupass_frontend/ui/core/theme/app_dimens.dart';
 import 'package:stupass_frontend/ui/core/theme/color_palette.dart';
 import 'package:stupass_frontend/ui/core/theme/text_styles.dart';
+import 'package:stupass_frontend/ui/features/account/presentation/saved_post_page.dart';
 import 'package:stupass_frontend/ui/features/account/presentation/widgets/profile_summary.dart';
 import 'package:stupass_frontend/ui/features/account/presentation/widgets/custom_button.dart';
 import 'package:stupass_frontend/ui/features/account/presentation/edit_profile_page.dart';
-
+import 'package:stupass_frontend/ui/features/account/presentation/change_password_page.dart';
+import 'package:stupass_frontend/ui/features/account/presentation/history_page.dart';
+import 'package:stupass_frontend/ui/features/account/presentation/notification_page.dart';
+import 'package:stupass_frontend/ui/features/account/presentation/review_page.dart';
+import 'package:stupass_frontend/ui/features/account/presentation/about_us_page.dart';
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
 
@@ -87,7 +92,12 @@ class SettingPage extends StatelessWidget {
                             color: ColorPalette.textPrimaryColor,
                             prefixIcon: Icons.lock_outline,
                             suffixIcon: Icons.arrow_forward,
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => ChangePasswordPage()),
+                              );
+                            },
                           ),
                           Divider(color: Colors.grey, height: 0.3),
                           CustomButton(
@@ -95,7 +105,12 @@ class SettingPage extends StatelessWidget {
                             color: ColorPalette.textPrimaryColor,
                             prefixIcon: Icons.notifications_none,
                             suffixIcon: Icons.arrow_forward,
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => NotificationPage()),
+                              );
+                            },
                           ),
                           Divider(color: Colors.grey, height: 0.3),
                           CustomButton(
@@ -131,7 +146,12 @@ class SettingPage extends StatelessWidget {
                             color: ColorPalette.textPrimaryColor,
                             prefixIcon: Icons.bookmark_border,
                             suffixIcon: Icons.arrow_forward,
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => SavedPostPage()),
+                              );
+                            },
                           ),
                           Divider(color: Colors.grey, height: 0.3),
                           CustomButton(
@@ -139,7 +159,12 @@ class SettingPage extends StatelessWidget {
                             color: ColorPalette.textPrimaryColor,
                             prefixIcon: Icons.history,
                             suffixIcon: Icons.arrow_forward,
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => HistoryPage()),
+                              );
+                            },
                           ),
                           Divider(color: Colors.grey, height: 0.3),
                           CustomButton(
@@ -147,7 +172,12 @@ class SettingPage extends StatelessWidget {
                             color: ColorPalette.textPrimaryColor,
                             prefixIcon: Icons.star_border,
                             suffixIcon: Icons.arrow_forward,
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => ReviewPage()),
+                              );
+                            },
                           ),
                         ],
                       ),
@@ -175,7 +205,12 @@ class SettingPage extends StatelessWidget {
                             color: ColorPalette.textPrimaryColor,
                             prefixIcon: Icons.assignment_outlined,
                             suffixIcon: Icons.arrow_forward,
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => AboutUsPage()),
+                              );
+                            },
                           ),
                           Divider(color: Colors.grey, height: 0.3),
                           CustomButton(
