@@ -68,8 +68,6 @@ class ViewDetailPostPage extends StatelessWidget {
                   SizedBox(height: AppDimens.spacingM),
                   SellerInfoCard(
                     avatarUrl: 'https://via.placeholder.com/60',
-                    backgroundImageUrl:
-                        'https://via.placeholder.com/400x100',
                     sellerName: 'Nguyễn Trần Khánh Duy',
                     universityName:
                         'University of Information and Technology',
