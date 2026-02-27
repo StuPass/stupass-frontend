@@ -5,7 +5,6 @@ import 'package:stupass_frontend/ui/core/theme/text_styles.dart';
 
 class SellerInfoCard extends StatelessWidget {
   final String avatarUrl;
-  final String backgroundImageUrl;
   final String sellerName;
   final String universityName;
   final int selledProducts;
@@ -16,7 +15,6 @@ class SellerInfoCard extends StatelessWidget {
   const SellerInfoCard({
     super.key,
     required this.avatarUrl,
-    required this.backgroundImageUrl,
     required this.sellerName,
     required this.universityName,
     required this.selledProducts,
@@ -36,23 +34,7 @@ class SellerInfoCard extends StatelessWidget {
         ),
         child: Column(
           children: [
-            // Background image
-            ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(AppDimens.radiusRec),
-                topRight: Radius.circular(AppDimens.radiusRec),
-              ),
-              child: Image.network(
-                backgroundImageUrl,
-                height: 100,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => Container(
-                  height: 100,
-                  color: ColorPalette.borderColor,
-                ),
-              ),
-            ),
+            
             // Seller info row
             Padding(
               padding: EdgeInsets.all(AppDimens.spacingM),

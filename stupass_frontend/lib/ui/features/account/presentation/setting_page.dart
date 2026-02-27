@@ -4,6 +4,7 @@ import 'package:stupass_frontend/ui/core/theme/color_palette.dart';
 import 'package:stupass_frontend/ui/core/theme/text_styles.dart';
 import 'package:stupass_frontend/ui/features/account/presentation/widgets/profile_summary.dart';
 import 'package:stupass_frontend/ui/features/account/presentation/widgets/custom_button.dart';
+import 'package:stupass_frontend/ui/features/account/presentation/edit_profile_page.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
@@ -73,7 +74,12 @@ class SettingPage extends StatelessWidget {
                             color: ColorPalette.textPrimaryColor,
                             prefixIcon: Icons.perm_identity,
                             suffixIcon: Icons.arrow_forward,
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => EditProfilePage()),
+                              );
+                            },
                           ),
                           Divider(color: Colors.grey, height: 0.3),
                           CustomButton(
