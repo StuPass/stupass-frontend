@@ -4,9 +4,55 @@ import 'package:stupass_frontend/ui/core/theme/color_palette.dart';
 import 'package:stupass_frontend/ui/core/theme/text_styles.dart';
 import 'package:stupass_frontend/ui/features/account/presentation/widgets/profile_summary.dart';
 import 'package:stupass_frontend/ui/features/account/presentation/widgets/custom_button.dart';
+import 'package:go_router/go_router.dart';
+import 'package:stupass_frontend/routing/routes.dart';
+import 'package:stupass_frontend/ui/features/account/view_models/setting_view_model.dart';
 
-class SettingPage extends StatelessWidget {
-  const SettingPage({super.key});
+class SettingPage extends StatefulWidget {
+  const SettingPage({super.key, required this.viewModel});
+
+  final SettingViewModel viewModel;
+
+  @override
+  State<SettingPage> createState() => _SettingPageState();
+}
+
+class _SettingPageState extends State<SettingPage> {
+  @override
+  void initState() {
+    super.initState();
+    widget.viewModel.addListener(_onResult);
+  }
+
+  @override
+  void didUpdateWidget(covariant SettingPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    oldWidget.viewModel.removeListener(_onResult);
+    widget.viewModel.addListener(_onResult);
+  }
+
+  @override
+  void dispose() {
+    widget.viewModel.removeListener(_onResult);
+    super.dispose();
+  }
+
+  void _onResult() {
+    if (widget.viewModel.isLoading) return;
+    if (widget.viewModel.isSuccess) {
+      // navigate to sign-in or home depending on flow
+      if (context.mounted) {
+        context.go(Routes.signin);
+      }
+    } else if (widget.viewModel.errorMessage != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(widget.viewModel.errorMessage!),
+          backgroundColor: ColorPalette.errorColor,
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -180,11 +226,34 @@ class SettingPage extends StatelessWidget {
                             onTap: () {},
                           ),
                           Divider(color: Colors.grey, height: 0.3),
-                          CustomButton(
-                            text: 'Đăng xuất',
-                            color: Colors.red,
-                            prefixIcon: Icons.logout,
-                            onTap: () {},
+                          ListenableBuilder(
+                            listenable: widget.viewModel,
+                            builder: (context, child) {
+                              if (widget.viewModel.isLoading) {
+                                return const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 12),
+                                  child: Center(
+                                    child: SizedBox(
+                                      width: 24,
+                                      height: 24,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+
+                              return CustomButton(
+                                text: 'Đăng xuất',
+                                color: Colors.red,
+                                prefixIcon: Icons.logout,
+                                onTap: () {
+                                  widget.viewModel.logout();
+                                },
+                              );
+                            },
                           ),
                         ],
                       ),

@@ -171,7 +171,7 @@ class AuthRepositoryRemote extends AuthRepository {
     try {
       if (_refreshToken != null) {
         final payload = LogoutRequest(refreshToken: _refreshToken!);
-        await _authApiClient.logout(payload);
+        await _authApiClient.logout(payload, accessToken: _accessToken);
         _log.info('Server session successfully destroyed.');
       }
     } catch (e) {

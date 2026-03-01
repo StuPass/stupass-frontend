@@ -141,7 +141,7 @@ class AuthApiClient {
   // ---------------------------------------------------------
   // LOGOUT
   // ---------------------------------------------------------
-  Future<void> logout(LogoutRequest payload) async {
+  Future<void> logout(LogoutRequest payload, {String? accessToken}) async {
     final client = _clientFactory();
     try {
       final uri = Uri(
@@ -155,6 +155,10 @@ class AuthApiClient {
       
       request.headers.add('ngrok-skip-browser-warning', 'true');
       request.headers.contentType = ContentType.json;
+      
+      if (accessToken != null) {
+        request.headers.add(HttpHeaders.authorizationHeader, 'Bearer $accessToken');
+      }
       
       request.write(jsonEncode(payload));
       

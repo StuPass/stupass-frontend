@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:stupass_frontend/data/repositories/auth/auth_repository.dart';
 
 import 'package:stupass_frontend/ui/features/account/presentation/setting_page.dart';
+import 'package:stupass_frontend/ui/features/account/view_models/setting_view_model.dart';
 import 'package:stupass_frontend/ui/features/auth/presentation/create_profile_page.dart';
 import 'package:stupass_frontend/ui/features/auth/presentation/email_waiting_page.dart';
 import 'package:stupass_frontend/ui/features/auth/presentation/signin_page.dart';
@@ -130,7 +131,9 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: Routes.settings,
-              builder: (context, state) => const SettingPage(),
+              builder: (context, state) => SettingPage(
+                viewModel: SettingViewModel(authRepository: context.read()),
+              ),
             ),
           ],
         ),
