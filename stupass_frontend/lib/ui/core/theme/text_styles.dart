@@ -12,6 +12,7 @@ class TextStyles {
   static const double largeBodySize = 18.0;
   static const double mediumBodySize = 16.0;
   static const double smallBodySize = 14.0;
+  static const double miniBodySize = 12.0;
 
   static const double largeCaptionSize = 12.0;
   static const double mediumCaptionSize = 11.0;

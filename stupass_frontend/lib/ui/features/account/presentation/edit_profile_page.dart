@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:stupass_frontend/ui/core/components/buttons/primary_button.dart';
+import 'package:stupass_frontend/ui/core/components/inputs/input_text_field.dart';
 import 'package:stupass_frontend/ui/core/theme/app_dimens.dart';
 import 'package:stupass_frontend/ui/core/theme/color_palette.dart';
 import 'package:stupass_frontend/ui/core/theme/text_styles.dart';
+import 'package:stupass_frontend/ui/features/account/presentation/widgets/input_contact_field.dart';
+import 'package:stupass_frontend/ui/features/account/presentation/widgets/input_date_field.dart';
+import 'package:stupass_frontend/ui/features/account/presentation/widgets/input_dropdown_field.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
@@ -11,8 +16,7 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  final _nameController =
-      TextEditingController(text: 'Nguyễn Trần Khánh Duy');
+  final _nameController = TextEditingController(text: 'Nguyễn Trần Khánh Duy');
   final _studentIdController = TextEditingController();
   final _schoolController = TextEditingController();
   final _addressController = TextEditingController();
@@ -53,10 +57,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
       backgroundColor: ColorPalette.backgroundColor,
       appBar: AppBar(
         backgroundColor: ColorPalette.surfaceColor,
+        scrolledUnderElevation: 0,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back,
-              color: ColorPalette.textPrimaryColor),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: ColorPalette.textPrimaryColor,
+          ),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: const Text(
@@ -85,48 +92,50 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   Container(
                     decoration: BoxDecoration(
                       color: ColorPalette.surfaceColor,
-                      borderRadius:
-                          BorderRadius.circular(AppDimens.radiusRec),
+                      borderRadius: BorderRadius.circular(AppDimens.radiusRec),
                     ),
                     padding: const EdgeInsets.all(AppDimens.spacingM),
                     child: Column(
                       children: [
-                        _buildLabeledField(
-                          label: 'Họ và tên *',
+                        InputTextField(
+                          label: 'Họ và tên',
+                          isRequired: true,
+                          hintText: '',
                           controller: _nameController,
-                          hint: '',
                         ),
                         const SizedBox(height: AppDimens.spacingM),
-                        _buildLabeledField(
-                          label: 'Mã số sinh viên *',
+                        InputTextField(
+                          label: 'Mã số sinh viên',
+                          isRequired: true,
+                          hintText: 'Mã số sinh viên của bạn',
                           controller: _studentIdController,
-                          hint: 'Mã số sinh viên của bạn',
                         ),
                         const SizedBox(height: AppDimens.spacingM),
-                        _buildLabeledField(
-                          label: 'Trường *',
+                        InputTextField(
+                          label: 'Trường',
+                          isRequired: true,
+                          hintText: 'Trường của bạn',
                           controller: _schoolController,
-                          hint: 'Trường của bạn',
                         ),
                         const SizedBox(height: AppDimens.spacingM),
-                        _buildLabeledField(
+                        InputTextField(
                           label: 'Địa chỉ',
+                          hintText: 'Địa chỉ của bạn',
                           controller: _addressController,
-                          hint: 'Địa chỉ của bạn',
                         ),
                         const SizedBox(height: AppDimens.spacingM),
-                        _buildDropdownField(
+                        InputDropdownField(
                           label: 'Giới tính',
-                          hint: 'Chọn giới tính',
+                          hintText: 'Chọn giới tính',
                           value: _selectedGender,
                           options: _genderOptions,
                           onChanged: (val) =>
                               setState(() => _selectedGender = val),
                         ),
                         const SizedBox(height: AppDimens.spacingM),
-                        _buildDateField(
+                        InputDateField(
                           label: 'Ngày sinh',
-                          hint: 'Ngày, tháng, sinh',
+                          hintText: 'Ngày, tháng, sinh',
                           value: _formatDate(_birthday),
                           onTap: _pickBirthday,
                         ),
@@ -142,12 +151,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   Container(
                     decoration: BoxDecoration(
                       color: ColorPalette.surfaceColor,
-                      borderRadius:
-                          BorderRadius.circular(AppDimens.radiusRec),
+                      borderRadius: BorderRadius.circular(AppDimens.radiusRec),
                     ),
                     child: Column(
                       children: [
-                        _buildContactRow(
+                        InputContactField(
                           icon: Icons.phone,
                           label: 'Số điện thoại',
                           onAdd: () {},
@@ -157,7 +165,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           indent: AppDimens.paddingDefault,
                           color: ColorPalette.backgroundColor,
                         ),
-                        _buildContactRow(
+                        InputContactField(
                           customIcon: _buildGoogleIcon(),
                           label: 'Google',
                           onAdd: () {},
@@ -173,33 +181,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ),
 
           // ─── Lưu button ───
-          Container(
-            color: ColorPalette.surfaceColor,
-            padding: const EdgeInsets.all(AppDimens.paddingDefault),
-            child: SizedBox(
-              width: double.infinity,
-              height: AppDimens.largeButtonHeight,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorPalette.primaryColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(AppDimens.radiusCir),
-                  ),
-                  elevation: 0,
-                ),
-                child: const Text(
-                  'Lưu',
-                  style: TextStyle(
-                    fontSize: TextStyles.mediumButtonTextSize,
-                    fontWeight: FontWeight.bold,
-                    color: ColorPalette.onPrimaryButtonColor,
-                    fontFamily: TextStyles.fontFamily,
-                  ),
-                ),
-              ),
-            ),
+          PrimaryButton(
+            label: 'Lưu',
+            labelSize: TextStyles.mediumButtonTextSize,
+            buttonHeight: AppDimens.mediumButtonHeight,
+            backgroundColor: ColorPalette.primaryColor,
+            onPressed: () {},
           ),
         ],
       ),
@@ -216,236 +203,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
         fontWeight: FontWeight.bold,
         color: ColorPalette.textPrimaryColor,
         fontFamily: TextStyles.fontFamily,
-      ),
-    );
-  }
-
-  Widget _buildLabeledField({
-    required String label,
-    required TextEditingController controller,
-    required String hint,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: TextStyles.smallBodySize,
-            fontWeight: FontWeight.w500,
-            color: ColorPalette.textPrimaryColor,
-            fontFamily: TextStyles.fontFamily,
-          ),
-        ),
-        const SizedBox(height: AppDimens.spacingXS),
-        SizedBox(
-          height: AppDimens.smallInputFieldHeight,
-          child: TextField(
-            controller: controller,
-            style: const TextStyle(
-              fontSize: TextStyles.smallBodySize,
-              color: ColorPalette.textPrimaryColor,
-              fontFamily: TextStyles.fontFamily,
-            ),
-            decoration: InputDecoration(
-              hintText: hint,
-              hintStyle: const TextStyle(
-                fontSize: TextStyles.smallBodySize,
-                color: ColorPalette.textSecondaryColor,
-                fontFamily: TextStyles.fontFamily,
-              ),
-              filled: true,
-              fillColor: ColorPalette.surfaceColor,
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(AppDimens.radiusRec),
-                borderSide: const BorderSide(
-                    color: ColorPalette.borderColor,
-                    width: AppDimens.borderWidth),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(AppDimens.radiusRec),
-                borderSide: const BorderSide(
-                    color: ColorPalette.primaryColor,
-                    width: AppDimens.borderWidth),
-              ),
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: AppDimens.spacingM,
-                vertical: AppDimens.spacingS,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildDropdownField({
-    required String label,
-    required String hint,
-    required String? value,
-    required List<String> options,
-    required ValueChanged<String?> onChanged,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: TextStyles.smallBodySize,
-            fontWeight: FontWeight.w500,
-            color: ColorPalette.textPrimaryColor,
-            fontFamily: TextStyles.fontFamily,
-          ),
-        ),
-        const SizedBox(height: AppDimens.spacingXS),
-        SizedBox(
-          height: AppDimens.smallInputFieldHeight,
-          child: DropdownButtonFormField<String>(
-            hint: Text(
-              hint,
-              style: const TextStyle(
-                fontSize: TextStyles.smallBodySize,
-                color: ColorPalette.textSecondaryColor,
-                fontFamily: TextStyles.fontFamily,
-              ),
-            ),
-            icon: const Icon(Icons.keyboard_arrow_down,
-                color: ColorPalette.textSecondaryColor),
-            style: const TextStyle(
-              fontSize: TextStyles.smallBodySize,
-              color: ColorPalette.textPrimaryColor,
-              fontFamily: TextStyles.fontFamily,
-            ),
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: ColorPalette.surfaceColor,
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(AppDimens.radiusRec),
-                borderSide: const BorderSide(
-                    color: ColorPalette.borderColor,
-                    width: AppDimens.borderWidth),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(AppDimens.radiusRec),
-                borderSide: const BorderSide(
-                    color: ColorPalette.primaryColor,
-                    width: AppDimens.borderWidth),
-              ),
-              contentPadding: const EdgeInsets.symmetric(
-                  horizontal: AppDimens.spacingM, vertical: 0),
-            ),
-            items: options
-                .map((opt) =>
-                    DropdownMenuItem(value: opt, child: Text(opt)))
-                .toList(),
-            onChanged: onChanged,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildDateField({
-    required String label,
-    required String hint,
-    required String value,
-    required VoidCallback onTap,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: TextStyles.smallBodySize,
-            fontWeight: FontWeight.w500,
-            color: ColorPalette.textPrimaryColor,
-            fontFamily: TextStyles.fontFamily,
-          ),
-        ),
-        const SizedBox(height: AppDimens.spacingXS),
-        GestureDetector(
-          onTap: onTap,
-          child: Container(
-            height: AppDimens.smallInputFieldHeight,
-            padding: const EdgeInsets.symmetric(
-                horizontal: AppDimens.spacingM),
-            decoration: BoxDecoration(
-              color: ColorPalette.surfaceColor,
-              borderRadius: BorderRadius.circular(AppDimens.radiusRec),
-              border: Border.all(
-                  color: ColorPalette.borderColor,
-                  width: AppDimens.borderWidth),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    value.isEmpty ? hint : value,
-                    style: TextStyle(
-                      fontSize: TextStyles.smallBodySize,
-                      color: value.isEmpty
-                          ? ColorPalette.textSecondaryColor
-                          : ColorPalette.textPrimaryColor,
-                      fontFamily: TextStyles.fontFamily,
-                    ),
-                  ),
-                ),
-                const Icon(Icons.calendar_today_outlined,
-                    size: AppDimens.iconSmall,
-                    color: ColorPalette.textSecondaryColor),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildContactRow({
-    IconData? icon,
-    Widget? customIcon,
-    required String label,
-    required VoidCallback onAdd,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppDimens.paddingDefault,
-        vertical: AppDimens.spacingM,
-      ),
-      child: Row(
-        children: [
-          if (customIcon != null)
-            customIcon
-          else
-            Icon(icon,
-                size: AppDimens.iconDefault,
-                color: ColorPalette.textSecondaryColor),
-          const SizedBox(width: AppDimens.spacingM),
-          Expanded(
-            child: Text(
-              label,
-              style: const TextStyle(
-                fontSize: TextStyles.smallBodySize,
-                color: ColorPalette.textPrimaryColor,
-                fontFamily: TextStyles.fontFamily,
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: onAdd,
-            child: const Text(
-              'Thêm',
-              style: TextStyle(
-                fontSize: TextStyles.smallBodySize,
-                color: ColorPalette.primaryColor,
-                fontWeight: FontWeight.w600,
-                fontFamily: TextStyles.fontFamily,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
