@@ -7,8 +7,8 @@ part 'register_request.g.dart';
 abstract class RegisterRequest with _$RegisterRequest {
   const factory RegisterRequest({
     required String username,
-    
-    required String phone,
+
+    required String email,
 
     required String password,
 
@@ -20,7 +20,6 @@ abstract class RegisterRequest with _$RegisterRequest {
 
     @JsonKey(name: 'school_id') 
     required String schoolId,
-
   }) = _RegisterRequest;
 
   factory RegisterRequest.fromJson(Map<String, dynamic> json) =>

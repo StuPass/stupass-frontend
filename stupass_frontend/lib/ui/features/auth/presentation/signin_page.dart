@@ -90,7 +90,7 @@ class _SigninPageState extends State<SigninPage> {
                 // 2. Form Section
                 // Phone Number Input
                 const Text(
-                  "Số điện thoại",
+                  "Email",
                   style: TextStyle(
                     fontSize: 16,
                     color: ColorPalette.textSecondaryColor,
@@ -100,17 +100,15 @@ class _SigninPageState extends State<SigninPage> {
                 const SizedBox(height: 8),
 
                 PrimaryTextformfield(
-                  hintText: "0123456789", 
-                  prefixWidget: const Icon(Icons.phone_outlined, color: Colors.grey), 
+                  hintText: "student@placeholder.edu.vn", 
+                  prefixWidget: const Icon(Icons.email_outlined, color: Colors.grey), 
                   onTogglePassword: () {}, 
                   keyboardType: TextInputType.number, 
                   controller: _phoneNumberController, 
                   onSaved: (newValue) {}, 
                   validator: (value) {
-                    final regex = RegExp(r'^(0)(3|5|7|8|9)[0-9]{8}$');
-
-                    if (value == null || !regex.hasMatch(value)) {
-                      return "Số điện thoại không hợp lệ.";
+                    if (value == null) {
+                      return "Vui lòng nhập email.";
                     }
 
                     return null; 
@@ -162,7 +160,7 @@ class _SigninPageState extends State<SigninPage> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () => context.push(Routes.forgotPassword),
                     child: const Text(
                       "Quên mật khẩu?",
                       style: TextStyle(

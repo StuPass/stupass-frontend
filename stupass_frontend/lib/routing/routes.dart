@@ -2,17 +2,19 @@ abstract final class Routes {
   // --- Root & Auth ---
   static const home = '/';
   static const signin = '/signin';
+  static const forgotPassword = '/forgot-password';
+  static const resetPassword = '/reset-password/:token';
   
   // --- Signup Flow (Nested) ---
   static const signup = '/signup';
   
-  static const verifyOtpRelative = 'verify_via_otp';
-  static const verifyOtpName = 'verify';
-  static const verifyOtp = '$signup/$verifyOtpRelative'; // '/signup/verify_via_otp'
+  static const emailWaitingRelative = 'email_waiting';
+  static const emailWaitingName = 'email';
+  static const emailWaiting = '$signup/$emailWaitingRelative'; // '/signup/verify_via_otp'
   
   static const createProfileRelative = 'create_profile';
   static const createProfileName = 'create';
-  static const createProfile = '$verifyOtp/$createProfileRelative'; // '/signup/verify_via_otp/create_profile'
+  static const createProfile = '$emailWaiting/$createProfileRelative'; // '/signup/verify_via_otp/create_profile'
 
   // --- Main Shell Tabs ---
   static const marketplace = '/marketplace';

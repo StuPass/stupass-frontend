@@ -1,21 +1,19 @@
 class RegistrationSession {
   String? username;
-  String? phone;
+  String? identifier;
   String? password;
-  String? otpCode;      
   String? fullName;     
   String? studentId;
   String? schoolId;
-  String? verificationId;
+  String? userId;
 
   void clear() {
     username = null;
-    phone = null;
+    identifier = null;
     password = null;
-    otpCode = null;
     fullName = null;
     studentId = null;
     schoolId = null;
-    verificationId = null;
+    userId = null;
   }
 }
