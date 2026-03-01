@@ -1,16 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:stupass_frontend/data/repositories/auth/auth_repository.dart';
 
 import 'package:stupass_frontend/ui/features/account/presentation/setting_page.dart';
+import 'package:stupass_frontend/ui/features/account/view_models/setting_view_model.dart';
 import 'package:stupass_frontend/ui/features/auth/presentation/create_profile_page.dart';
+import 'package:stupass_frontend/ui/features/auth/presentation/email_waiting_page.dart';
 import 'package:stupass_frontend/ui/features/auth/presentation/signin_page.dart';
 import 'package:stupass_frontend/ui/features/auth/presentation/signup_page.dart';
-import 'package:stupass_frontend/ui/features/auth/presentation/verify_via_otp_page.dart';
 import 'package:stupass_frontend/ui/features/auth/presentation/welcome_page.dart';
 import 'package:stupass_frontend/ui/features/auth/view_models/create_profile_view_model.dart';
+import 'package:stupass_frontend/ui/features/auth/view_models/email_waiting_view_model.dart';
+import 'package:stupass_frontend/ui/features/auth/view_models/signin_view_model.dart';
 import 'package:stupass_frontend/ui/features/auth/view_models/signnup_view_model/signup_view_model.dart';
-import 'package:stupass_frontend/ui/features/auth/view_models/verify_via_otp_view_model.dart';
+import 'package:stupass_frontend/ui/features/auth/view_models/forgot_password_view_model.dart';
+import 'package:stupass_frontend/ui/features/auth/view_models/reset_password_view_model.dart';
+import 'package:stupass_frontend/ui/features/auth/presentation/forgot_password_page.dart';
+import 'package:stupass_frontend/ui/features/auth/presentation/reset_password_page.dart';
 import 'package:stupass_frontend/ui/features/chat/presentation/chat_box_page.dart';
 import 'package:stupass_frontend/ui/features/home/presentation/add_post_page.dart';
 import 'package:stupass_frontend/ui/features/home/presentation/marketplace_page.dart';
@@ -30,33 +37,52 @@ final router = GoRouter(
     ),
     GoRoute(
       path: Routes.signin,
-      builder: (context, state) => const SigninPage(),
+      builder: (context, state) => SigninPage(
+        viewModel: SigninViewModel(authRepository: context.read()),
+      ),
+    ),
+    GoRoute(
+      path: Routes.forgotPassword,
+      builder: (context, state) => ForgotPasswordPage(
+        viewModel: ForgotPasswordViewModel(authRepository: context.read()),
+      ),
+    ),
+    GoRoute(
+      path: Routes.resetPassword,
+      builder: (context, state) => ResetPasswordPage(
+        viewModel: ResetPasswordViewModel(authRepository: context.read()),
+        token: state.pathParameters['token'] ?? '',
+      ),
     ),
     GoRoute(
       path: Routes.signup,
       builder: (context, state) => SignupPage(
-        viewModel: SignupViewModel(registrationSession: context.read()),
+        viewModel: SignupViewModel(
+          registrationSession: context.read(),
+          authRepository: context.read(),
+        ),
       ),
       routes: [
         GoRoute(
-          name: Routes.verifyOtpName,
-          path: Routes.verifyOtpRelative, 
-          builder: (context, state) => OtpVerificationPage(
-            viewModel: OtpVerificationViewModel(registrationSession: context.read())
-          ),
-          routes: [
-            GoRoute(
-              name: Routes.createProfileName,
-              path: Routes.createProfileRelative,
-              builder: (context, state) => CreateProfilePage(
-                viewModel: CreateProfileViewModel(
-                    registrationSession: context.read(),
-                    authRepository: context.read(),
-                  ),
+          name: Routes.emailWaitingName,
+          path: Routes.emailWaitingRelative,
+          builder: (context, state) => EmailWaitingPage(
+            viewModel: EmailWaitingViewModel(
+                authRepository: context.read(), 
+                registrationSession: context.read(),
               ),
-            )
-          ]
+          ),
         ),
+        GoRoute(
+          name: Routes.createProfileName,
+          path: Routes.createProfileRelative,
+          builder: (context, state) => CreateProfilePage(
+            viewModel: CreateProfileViewModel(
+                registrationSession: context.read(),
+                authRepository: context.read(),
+              ),
+          ),
+        )
       ]
     ),
     StatefulShellRoute.indexedStack(
@@ -105,7 +131,9 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: Routes.settings,
-              builder: (context, state) => const SettingPage(),
+              builder: (context, state) => SettingPage(
+                viewModel: SettingViewModel(authRepository: context.read()),
+              ),
             ),
           ],
         ),

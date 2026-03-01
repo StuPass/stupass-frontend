@@ -22,20 +22,16 @@ class CreateProfileViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final phone = _registrationSession.phone!;
-      final password = _registrationSession.password!;
-
-      await _authRepository.register(
+      _registrationSession.userId = await _authRepository.register(
         username: username,
-        phone: phone,
-        password: password,
+        identifier: _registrationSession.identifier!,
+        password: _registrationSession.password!,
         fullName: fullName,
         studentId: studentId,
         schoolId: schoolId,
       );
 
       _isSuccess = true;
-      _registrationSession.clear();
     } catch (e) {
       _isSuccess = false;
       _errorMessage = e.toString();

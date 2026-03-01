@@ -20,7 +20,7 @@ class SignupPage extends StatefulWidget {
 class _SignupPageState extends State<SignupPage> {
   final _formKey = GlobalKey<FormState>();
 
-  final _phoneController = TextEditingController();
+  final _identifierController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
 
@@ -30,22 +30,18 @@ class _SignupPageState extends State<SignupPage> {
   @override
   void initState() {
     super.initState();
-    widget.viewModel.addListener(_onResult);
   }
   
   @override
   void didUpdateWidget(covariant SignupPage oldWidget) {
     super.didUpdateWidget(oldWidget);
-    oldWidget.viewModel.removeListener(_onResult);
-    widget.viewModel.addListener(_onResult);
   }  
 
   @override
   void dispose() {
-    _phoneController.dispose();
+    _identifierController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
-    widget.viewModel.removeListener(_onResult);
     super.dispose();
   }
 
@@ -105,9 +101,9 @@ class _SignupPageState extends State<SignupPage> {
                     // 2. Form Section
                     // ---------------------------------------------------------
                     
-                    // --- Phone Field ---
+                    // --- identifier Field ---
                     const Text(
-                      "Số điện thoại",
+                      "Email",
                       style: TextStyle(
                         fontSize: 16,
                         color: ColorPalette.textSecondaryColor,
@@ -115,17 +111,15 @@ class _SignupPageState extends State<SignupPage> {
                     ),
                     const SizedBox(height: 8),
                     PrimaryTextformfield(
-                      hintText: "0123456789",
-                      prefixWidget: const Icon(Icons.phone_outlined, color: Colors.grey),
+                      hintText: "student@placeholder.edu.vn",
+                      prefixWidget: const Icon(Icons.email_outlined, color: Colors.grey),
                       onTogglePassword: () {}, 
-                      keyboardType: TextInputType.phone,
-                      controller: _phoneController,
+                      keyboardType: TextInputType.emailAddress,
+                      controller: _identifierController,
                       onSaved: (newValue) {},
                       validator: (value) {
-                        final regex = RegExp(r'^(0)(3|5|7|8|9)[0-9]{8}$');
-
-                        if (value == null || !regex.hasMatch(value)) {
-                          return "Số điện thoại không hợp lệ.";
+                        if (!value!.contains("edu")) {
+                          return "Email không phải của sinh viên.";
                         }
 
                         return null; 
@@ -201,43 +195,29 @@ class _SignupPageState extends State<SignupPage> {
                     // ---------------------------------------------------------
                     // 3. Action Section
                     // ---------------------------------------------------------
-                    ListenableBuilder(
-                      listenable: widget.viewModel, 
-                      
-                      builder: (context, child) {
-                        if (widget.viewModel.isLoading) {
-                          return const Center(
-                            child: CircularProgressIndicator(
-                              color: ColorPalette.primaryColor,
-                            ),
+                    PrimaryButton(
+                    label: "Đăng ký",
+                    labelSize: TextStyles.largeButtonTextSize,
+                    buttonHeight: 56,
+                    backgroundColor: ColorPalette.primaryColor,
+                    suffixIcon: Icons.arrow_forward,
+                    onPressed: () {
+                        final identifier = _identifierController.text.trim();
+                        final password = _passwordController.text;
+                        final confirmPassword = _confirmPasswordController.text;
+
+                        if (password != confirmPassword) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Mật khẩu không khớp!')),
                           );
+                          return; 
                         }
 
-                        return PrimaryButton(
-                          label: "Đăng ký",
-                          labelSize: TextStyles.largeButtonTextSize,
-                          buttonHeight: 56,
-                          backgroundColor: ColorPalette.primaryColor,
-                          suffixIcon: Icons.arrow_forward,
-                          onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
-                              final phone = _phoneController.text.trim();
-                              final password = _passwordController.text;
-                              final confirmPassword = _confirmPasswordController.text;
-
-                              if (password != confirmPassword) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Mật khẩu không khớp!')),
-                                );
-                                return; 
-                              }
-
-                              await widget.viewModel.sendFirebaseOtp(phone, password);
-                            }
-                          },
-                        );                
+                        widget.viewModel.register(identifier, password);
+                        context.pushNamed(Routes.createProfileName);
                       },
                     ),
+
 
                     const Spacer(),
 
@@ -275,26 +255,5 @@ class _SignupPageState extends State<SignupPage> {
           ),
         )
      );
-  }
-
-  void _onResult() {
-    if (widget.viewModel.isSuccess) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Xác minh thành công!'), 
-          backgroundColor: Colors.green,
-        ),
-      );
-
-      if (context.mounted) context.pushNamed(Routes.verifyOtpName);
-    }
-    else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(widget.viewModel.errorMessage!),
-          backgroundColor: ColorPalette.errorColor,
-        ),
-      );
-    }
   }
 }

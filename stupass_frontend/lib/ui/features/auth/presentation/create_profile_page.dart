@@ -277,6 +277,8 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
     );
   }
   void _onResult() {
+    if (widget.viewModel.isLoading) return;
+    
     if (widget.viewModel.isSuccess) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -285,7 +287,7 @@ class _CreateProfilePageState extends State<CreateProfilePage> {
         ),
       );
 
-      if (context.mounted) context.go(Routes.signin);
+      if (context.mounted) context.pushNamed(Routes.emailWaitingName);
     } else if (widget.viewModel.errorMessage != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
